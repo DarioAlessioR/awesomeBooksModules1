@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 class Books {
   constructor() {
     this.id = '';
@@ -108,7 +109,6 @@ const lissec = document.querySelector('.books', '.list-section')
 const lisadd = document.querySelector('.add', '.add-section')
 const liscon = document.querySelector('.contact', '.contact-section')
 
-
 ll.addEventListener('click', () => {
   lissec.classList.add('showElement');
   lissec.classList.remove('hide');
@@ -117,7 +117,7 @@ ll.addEventListener('click', () => {
   liscon.classList.add('hide');
   liscon.classList.remove('showElement');
 });
-  
+
 aa.addEventListener('click', () => {
   lissec.classList.add('hide');
   lissec.classList.remove('showElement');
