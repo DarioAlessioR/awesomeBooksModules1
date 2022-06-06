@@ -1,4 +1,8 @@
 /* eslint-disable linebreak-style */
+
+import MyLinks from './modules/MyLinks.js';
+import { DateTime } from './modules/luxon.min.js';
+
 class Books {
   constructor() {
     this.id = '';
@@ -86,6 +90,26 @@ function removeme(id) {
 }
 
 const Links = document.querySelectorAll('.links');
+Links.forEach(MyLinks);
+
+/*
+function MyLinks(link) {
+  link.addEventListener('click', () => {
+    const sections = document.querySelectorAll('section');
+    sections.forEach((sec) => {
+      sec.classList.add('hide');
+      if (sec.classList.contains('showElement')) {
+        sec.classList.remove('showElement');
+      }
+    });
+    const section = document.querySelector(`section.${link.classList[1]}`);
+    section.classList.add('showElement');
+  });
+}
+*/
+
+/*
+const Links = document.querySelectorAll('.links');
 Links.forEach((link) => {
   link.addEventListener('click', () => {
     const sections = document.querySelectorAll('section');
@@ -99,6 +123,7 @@ Links.forEach((link) => {
     section.classList.add('showElement');
   });
 });
+*/
 
 /*
 
@@ -137,8 +162,13 @@ cc.addEventListener('click', () => {
 });
 */
 
+const now = DateTime.now();
 const dateTime = document.querySelector('.current-date');
+dateTime.innerHTML = `Local date: ${now.toLocaleString(DateTime.DATE_FULL)} - Local time: ${now.hour}:${(now.minute)}:${(now.second)} hrs.`;
+
+/*
 dateTime.innerHTML = `${new Date().toLocaleDateString()},  ${new Date().toLocaleTimeString()}`;
+*/
 
 removeme();
 Mybooks();
