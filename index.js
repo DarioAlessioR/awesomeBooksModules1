@@ -1,4 +1,7 @@
 /* eslint-disable linebreak-style */
+
+import { DateTime } from './modules/luxon.min.js';
+
 class Books {
   constructor() {
     this.id = '';
@@ -100,45 +103,13 @@ Links.forEach((link) => {
   });
 });
 
+const now = DateTime.now();
+const dateTime = document.querySelector('.current-date');
+dateTime.innerHTML = `Local date: ${now.toLocaleString(DateTime.DATE_FULL)} - Local time: ${now.hour}:${(now.minute)}:${(now.second)} hrs.`;
+
 /*
-
-const aa = document.querySelector('.add-section');
-const ll = document.querySelector('.list-section');
-const cc = document.querySelector('.contact-section');
-const lissec = document.querySelector('.books', '.list-section')
-const lisadd = document.querySelector('.add', '.add-section')
-const liscon = document.querySelector('.contact', '.contact-section')
-
-ll.addEventListener('click', () => {
-  lissec.classList.add('showElement');
-  lissec.classList.remove('hide');
-  lisadd.classList.add('hide');
-  lisadd.classList.remove('showElement');
-  liscon.classList.add('hide');
-  liscon.classList.remove('showElement');
-});
-
-aa.addEventListener('click', () => {
-  lissec.classList.add('hide');
-  lissec.classList.remove('showElement');
-  lisadd.classList.add('showElement');
-  lisadd.classList.remove('hide');
-  liscon.classList.add('hide');
-  liscon.classList.remove('showElement');
-});
-
-cc.addEventListener('click', () => {
-  lissec.classList.add('hide');
-  lissec.classList.remove('showElement');
-  lisadd.classList.add('hide');
-  lisadd.classList.remove('showElement');
-  liscon.classList.add('showElement');
-  liscon.classList.remove('hide');
-});
-*/
-
 const dateTime = document.querySelector('.current-date');
 dateTime.innerHTML = `${new Date().toLocaleDateString()},  ${new Date().toLocaleTimeString()}`;
-
+*/
 removeme();
 Mybooks();
