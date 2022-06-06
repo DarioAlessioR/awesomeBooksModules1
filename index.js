@@ -2,6 +2,10 @@
 
 import { DateTime } from './modules/luxon.min.js';
 
+/*
+import MyLinks from './modules/MyLinks.js';
+*/
+
 class Books {
   constructor() {
     this.id = '';
@@ -89,6 +93,10 @@ function removeme(id) {
 }
 
 const Links = document.querySelectorAll('.links');
+/*
+Links.forEach(MyLinks);
+*/
+
 Links.forEach((link) => {
   link.addEventListener('click', () => {
     const sections = document.querySelectorAll('section');
