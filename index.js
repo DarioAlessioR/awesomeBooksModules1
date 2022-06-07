@@ -3,10 +3,6 @@ import mybooks from './modules/mybooks.js';
 import manageLinks from './modules/managelinks.js';
 import { DateTime } from './modules/luxon.min.js';
 
-/*
-import MyLinks from './modules/MyLinks.js';
-*/
-
 class Books {
   constructor() {
     this.id = '';
@@ -86,11 +82,6 @@ const removeBook = (Book, mybooks) => {
 const now = DateTime.now();
 const dateTime = document.querySelector('.current-date');
 dateTime.innerHTML = `Local date: ${now.toLocaleString(DateTime.DATE_FULL)} - Local time: ${now.hour}:${(now.minute)}:${(now.second)} hrs.`;
-
-/*
-const dateTime = document.querySelector('.current-date');
-dateTime.innerHTML = `${new Date().toLocaleDateString()},  ${new Date().toLocaleTimeString()}`;
-*/
 
 mybooks(books);
 manageLinks();
