@@ -1,5 +1,6 @@
 /* eslint-disable linebreak-style */
-
+import mybooks from './modules/mybooks.js';
+import manageLinks from './modules/managelinks.js';
 import { DateTime } from './modules/luxon.min.js';
 
 /*
@@ -41,39 +42,23 @@ if (localStorage.getItem('books') !== null && localStorage.getItem('books') !== 
 }
 let books = Book.getBooks();
 
-const submitbtn = document.getElementById('submit');
-
-function Mybooks() {
-  if (books && books.length >= 0) {
-    const displyBooks = document.querySelector('.bookslist');
-    displyBooks.innerHTML = '';
-    books.forEach((book) => {
-      const list = document.createElement('li');
-      const author = document.createElement('p');
-      const btn = document.createElement('button');
-      btn.innerHTML = 'Remove';
-      author.innerHTML = `"${book.title}" by ${book.author}`;
-      btn.setAttribute('id', book.id);
-      btn.setAttribute('class', 'remove-btn');
-      btn.setAttribute('onclick', `removeme(${book.id});`);
-      list.appendChild(author);
-      list.appendChild(btn);
-      displyBooks.appendChild(list);
-    });
-  }
-}
-
 function addbook(title, author) {
   if (title.length < 2 && author.length < 1) {
     const message = document.getElementById('message');
     message.innerHTML = 'please, fill all input fields';
   } else {
-    Book.addBook(books && books.length > 0 ? books[books.length - 1].id + 1 : 1, author, title);
+    Book.addBook(
+      books.length > 0 ? books[books.length - 1].id + 1 : 1,
+      author,
+      title,
+    );
     books = Book.getBooks();
     localStorage.setItem('books', JSON.stringify(books));
-    Mybooks();
+    mybooks(books);
   }
 }
+
+const submitbtn = document.getElementById('submit');
 
 submitbtn.addEventListener('click', () => {
   const title = document.getElementById('input-title');
@@ -85,31 +70,18 @@ submitbtn.addEventListener('click', () => {
   title.value = '';
 });
 
-function removeme(id) {
-  Book.removeBook(Number(id));
-  books = Book.getBooks();
-  localStorage.setItem('books', JSON.stringify(books));
-  Mybooks();
-}
-
-const Links = document.querySelectorAll('.links');
-/*
-Links.forEach(MyLinks);
-*/
-
-Links.forEach((link) => {
-  link.addEventListener('click', () => {
-    const sections = document.querySelectorAll('section');
-    sections.forEach((sec) => {
-      sec.classList.add('hide');
-      if (sec.classList.contains('showElement')) {
-        sec.classList.remove('showElement');
-      }
+const removeBook = (Book, mybooks) => {
+  const allBooks = document.querySelectorAll('.remove-btn');
+  allBooks.forEach((oneBook) => {
+    oneBook.addEventListener('click', (e) => {
+      Book.removeBook(Number(e.target.id));
+      const books = Book.getBooks();
+      localStorage.setItem('books', JSON.stringify(books));
+      mybooks(books);
+      window.location.reload();
     });
-    const section = document.querySelector(`section.${link.classList[1]}`);
-    section.classList.add('showElement');
   });
-});
+};
 
 const now = DateTime.now();
 const dateTime = document.querySelector('.current-date');
@@ -119,5 +91,7 @@ dateTime.innerHTML = `Local date: ${now.toLocaleString(DateTime.DATE_FULL)} - Lo
 const dateTime = document.querySelector('.current-date');
 dateTime.innerHTML = `${new Date().toLocaleDateString()},  ${new Date().toLocaleTimeString()}`;
 */
-removeme();
-Mybooks();
+
+mybooks(books);
+manageLinks();
+removeBook(Book, mybooks);
